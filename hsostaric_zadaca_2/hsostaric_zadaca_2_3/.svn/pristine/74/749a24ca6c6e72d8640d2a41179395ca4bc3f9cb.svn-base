@@ -1,0 +1,22 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+index.naslov=Po\u010detna stranica - Vje\u017eba 10_1
+odabirDrzave.naslov=Odabir dr\u017eave
+odabirDrzave.premaloZnakova=Nema min 2 znaka u
+odabirDrzave.prikaziAerodromeZaDrzavu=Prika\u017ei aerodrome za dr\u017eavu
+odabirDrzave.upisiKodDrzave=Upi\u0161i kod dr\u017eave
+predlozak.engleski=English
+predlozak.hrvatski=Hrvatski
+predlozak.izbornikOdabirDrzave=Odabir dr\u017eave
+predlozak.izbornikPocetak=Po\u010detna stranica
+predlozak.izbornikPregledAerodroma=Pregled aerodroma
+predlozak.njemacki=Deutsch
+predlozak.odaberiJezik=Odaberi jezik
+pregledAerodroma.grad=Grad
+pregledAerodroma.ident=Identifikacija
+pregledAerodroma.iso=ISO kod zemlje
+pregledAerodroma.naslov=Pregled aerodroma
+pregledAerodroma.naziv=Naziv aerodroma
+pregledAerodroma.pregledAerodroma=Pregled aerodroma

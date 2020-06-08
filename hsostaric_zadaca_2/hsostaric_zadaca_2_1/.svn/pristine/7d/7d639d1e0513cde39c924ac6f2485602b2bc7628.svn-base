@@ -1,0 +1,55 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.foi.nwtis.hsostaric.web.dretve;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.foi.nwtis.hsostaric.konfiguracije.bp.BP_Konfiguracija;
+import org.foi.nwtis.rest.klijenti.OSKlijent;
+
+/**
+ *
+ * @author Hrvoje Šoštarić
+ */
+public class PreuzimanjeLetovaAvionaAerodroma extends Thread{
+    int intervalCiklusa = 100*1000;
+    Boolean krajPreuzimanja=false; 
+    BP_Konfiguracija konf;
+    OSKlijent oSKlijent;
+    String korisnickoIme;
+    String lozinka;
+    int brojac=0;
+    //TODO potrebne varijable/atributi
+    public PreuzimanjeLetovaAvionaAerodroma(BP_Konfiguracija konf) {
+        this.konf = konf;
+    }
+    
+    @Override
+    public void interrupt() {
+        krajPreuzimanja=true;
+        super.interrupt(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void run() {
+       while(!krajPreuzimanja){
+           System.out.println("Brojac: "+brojac++);
+           try {
+               //TODO preuzimanje aerodroma, i za aerodrome avione za pojedini dan
+               Thread.sleep(intervalCiklusa);
+           } catch (InterruptedException ex) {
+               Logger.getLogger(PreuzimanjeLetovaAvionaAerodroma.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+    }
+
+    @Override
+    public synchronized void start() {
+        //TODO preuzimanje podataka iz konfiguracije i pridruživanje atributa
+        super.start(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}

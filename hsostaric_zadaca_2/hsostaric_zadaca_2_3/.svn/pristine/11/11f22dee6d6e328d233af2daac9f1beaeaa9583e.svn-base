@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./predlozak.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="naslov">
+        Pregled aerodroma
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <div class="blok1">
+                <h:panelGrid columns="4">
+                    <h:outputLabel value="Od datuma: "/>
+                    <h:inputText value="#{pregledAerodroma.datumPocetka}"/>
+                    <h:outputLabel value="Do datuma: "/>
+                    <h:inputText value="#{pregledAerodroma.datumKraja}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <h:commandButton value="Preuzmi aerodrome korisnika" action="#{pregledAerodroma.preuzmiAerodromeKorisnika()}"/>
+                </h:panelGrid>
+            </div>
+            <div class="blok2">
+                <p:dataTable value="#{pregledAerodroma.aerodromiKorisnika}" var="a" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                             {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}
+                             {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,30">
+                    <p:column>
+                        <f:facet name="header">ICAO</f:facet>#{a.icao}
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Naziv</f:facet>#{a.naziv}
+                    </p:column>
+
+                    <p:column> <f:facet name="header">Država</f:facet>#{a.drzava}</p:column>
+                    <p:column>
+                        <p:commandButton value="Preuzmi avione" />
+                        <p:commandButton value="Preuzmi GPS i meteo" action="#{pregledAerodroma.dajGeolokacijskePodatke(a.icao)}" />
+                    </p:column>
+                </p:dataTable>  
+
+            </div>
+            <div class="blok3">
+                <br/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="GPS BP š: #{pregledAerodroma.lokacija.latitude}"/>
+                    <h:outputText value="GPS BP d: #{pregledAerodroma.lokacija.longitude}" />
+                    <h:outputText value=" GPS NA š: #{pregledAerodroma.lokacijaServisa.latitude}"/>
+                    <h:outputText value=" GPS NA d: #{pregledAerodroma.lokacijaServisa.longitude}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <h:outputText value="Temp: #{pregledAerodroma.meteoPodaci.temperatureValue}"/>
+                    <h:outputText value="Vlaga: #{pregledAerodroma.meteoPodaci.humidityValue}"/>
+                </h:panelGrid>
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

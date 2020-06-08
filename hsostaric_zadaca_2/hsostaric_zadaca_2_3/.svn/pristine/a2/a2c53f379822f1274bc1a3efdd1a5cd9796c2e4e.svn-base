@@ -1,0 +1,88 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.foi.nwtis.hsostaric.rest.klijenti;
+
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
+import java.util.logging.Filter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+
+/**
+ * Jersey REST client generated for REST resource:Zadaca2RestAerodromi
+ * [aerodromi]<br>
+ * USAGE:
+ * <pre>
+ *        Zadaca2_2RS client = new Zadaca2_2RS();
+ *        Object response = client.XXX(...);
+ *        // do whatever with response
+ *        client.close();
+ * </pre>
+ *
+ * @author Hrvoje-PC
+ */
+public class Zadaca2_2RS {
+
+    private WebTarget webTarget;
+    private Client client;
+    private static final String BASE_URI = "http://localhost:8080/hsostaric_zadaca_2_2/webresources";
+    private String korisnik;
+    private String lozinka;
+
+    public Zadaca2_2RS() {
+        client = javax.ws.rs.client.ClientBuilder.newClient();
+        webTarget = client.target(BASE_URI).path("aerodromi");
+    }
+
+    public Zadaca2_2RS(String korisnik, String lozinka) {
+        client = javax.ws.rs.client.ClientBuilder.newClient();
+        webTarget = client.target(BASE_URI).path("aerodromi");
+        this.korisnik = korisnik;
+        this.lozinka = lozinka;
+    }
+
+    public void putJson(Object requestEntity) throws ClientErrorException {
+        webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public <T> T dajAerodomeKorisnika(Class<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        System.out.println("URL: " + resource.getUri().toString());
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+                .header("korisnik", korisnik)
+                .header("lozinka", lozinka)
+                .get(responseType);
+    }
+
+    public <T> T dajAerodrome(Class<T> responseType, String drzava, String naziv) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("svi");
+        if (!drzava.equals("")) {
+            resource = resource.queryParam("drzava", drzava);
+            System.out.println("Drzava: " + drzava + "\n path: " + resource.getUri().toString());
+        }
+        if (!naziv.equals("")) {
+                resource = resource.queryParam("naziv",naziv);
+           
+            System.out.println("Naziv: " + naziv + "\n Cvikipath: " + resource.getUri());
+
+        }
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON).header("korisnik", korisnik)
+                .header("lozinka", lozinka)
+                .get(responseType);
+    }
+
+    public void close() {
+        client.close();
+    }
+
+}

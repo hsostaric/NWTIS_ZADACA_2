@@ -1,0 +1,53 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+predlozak.pocetna=Pocetna
+predlozak.lokalizacija=Lokalizacija
+predlozak.prijava=Prijava
+predlozak.dodajAerodrom=Dodaj aerodrom
+predlozak.pregledAerodroma=Pregled aerodroma
+predlozak.pregledAviona=Pregled aviona
+predlozak.odjava=Odjava
+lokal.naslov=Lokalizacija
+lokal.hrvatski=Hrvatski
+lokal.njemacki=Deutsch
+lokal.odaberiJezik=Odaberi jezik
+pregledAerodroma.naslov=Pregled aerodroma
+pregledAerodroma.naziv=Naziv aerodroma
+index.pocetna=Po\u010detna stranica
+lokal.engleski=English
+dodavanjeAerodroma.naslov=Dodavanje aerodrom
+dodavanjeAerodroma.naziv=Naziv aerodroma
+dodavanjeAerodroma.preuzmi=Preuzmi aerodrome prema nazivu
+dodavanjeAerodroma.drzava=Dr\u017eava
+dodavanjeAerodroma.preuzmiDrzava=Preuzmi aerodrome iz dr\u017eave
+dodavanjeAerodroma.ICAO=ICAO
+dodavanjeAerodroma.nazivAerodroma=Naziv
+dodavanjeAerodroma.drzavaAerodroma=Dr\u017eava
+dodavanjeAerodroma.dodajAerodrom=Dodaj aerodrom
+pregledAerodroma.odDatuma=Od datuma
+pregledAerodroma.doDatuma=Do datuma
+pregledAerodroma.preuzmiAerodrome=Preuzmi aerodrome korisnika
+pregledAerodroma.icao=ICAO
+pregledAerodroma.drzava=Dr\u017eava
+pregledAerodroma.preuzmiAvione=Preuzmi avione
+pregledAerodroma.preuzmiGPSMeteo=Preuzmi GPS i meteo
+pregledAerodroma.gpsbaza\u0160=GPS BP \u0161
+pregledAerodroma.gpsbazaD=GPS BP d
+pregledAerodroma.gpsServis\u0160=GPS NA \u0161
+pregledAerodroma.gpsServisD=GPS NA d
+pregledAerodroma.temperatura=Temperatura
+pregledAerodroma.vlaga=Vlaga
+pregledAviona.naslov=Pregled aviona
+pregledAviona.icao24=ICAO24
+pregledAviona.pozivniZnak=Pozivni znak
+pregledAviona.prvoVrijeme=1.vrijeme
+pregledAviona.drugoVrijeme=2.vrijeme
+pregledAviona.polaziste=Polazi\u0161ni aerodrom
+pregledAviona.odrediste=Odredi\u0161ni aerodrom
+prijavaKorisnika.naslov=Prijava korisnika
+prijavaKorisnika.username=Korisni\u010dko ime
+prijavaKorisnika.lozinka=Lozinka
+prijavaKorisnika.poruka=Morate popuniti polje
+prijavaKorisnika.prijaviMe=Prijavi se

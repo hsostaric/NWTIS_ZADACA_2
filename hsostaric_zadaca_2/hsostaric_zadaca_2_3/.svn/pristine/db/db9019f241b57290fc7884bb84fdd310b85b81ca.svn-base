@@ -1,0 +1,138 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.foi.nwtis.hsostaric.web.zrna;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.sound.midi.Soundbank;
+import lombok.Getter;
+import lombok.Setter;
+import org.foi.nwtis.hsostaric.rest.klijenti.Zadaca2_2RS;
+import org.foi.nwtis.podaci.Aerodrom;
+import org.foi.nwtis.podaci.OdgovorAerodrom;
+import org.foi.nwtis.rest.podaci.Lokacija;
+
+/**
+ *
+ * @author Hrvoje-PC
+ */
+@Named(value = "dodavanjeAerodroma")
+@SessionScoped
+public class DodavanjeAerodroma implements Serializable {
+
+    @Inject
+    PrijavaKorisnika prijavaKorisnika;
+
+    @Getter
+    @Setter
+    String naziv;
+    @Getter
+    @Setter
+    String drzava;
+    @Setter
+    @Getter
+    List<Aerodrom> aerodromi;
+    @Setter
+    @Getter
+    List<Aerodrom> aerodromiKorisnika = new ArrayList<>();
+    @Getter
+    @Setter
+    String icaoOdabrani;
+    @Getter
+    @Setter
+    String korisnik = "";
+    @Getter
+    @Setter
+    String lozinka = "";
+
+    /**
+     * Creates a new instance of DodavanjeAerodroma
+     */
+    public DodavanjeAerodroma() {
+      
+        Zadaca2_2RS zrs = new Zadaca2_2RS(korisnik, lozinka);
+        OdgovorAerodrom odgovor = zrs.dajAerodomeKorisnika(OdgovorAerodrom.class);
+        aerodromiKorisnika = Arrays.asList(odgovor.getOdgovor());
+        System.out.println("Aerodromi korisnika: "+aerodromiKorisnika.size());
+        for(Aerodrom aerodrom : aerodromiKorisnika){
+            System.out.println("Icao: "+aerodrom.getIcao()+"\n"+"Naziv: "+aerodrom.getDrzava()+"\nDrzava: "+aerodrom.getDrzava());
+        }
+    }
+
+    public void preuzmiPodatkeKorisnika() {
+        korisnik = prijavaKorisnika.getKorisnickoIme();
+        lozinka = prijavaKorisnika.getLozinka();
+    }
+
+    public String dajAerodromeNaziv() {
+        preuzmiPodatkeKorisnika();
+        if (naziv.length() >= 3) {
+            aerodromi = dajAerodrome(korisnik, lozinka, "", naziv);
+            if (aerodromi == null
+                    || aerodromi.isEmpty()) {
+                aerodromi = new ArrayList<>();
+            }
+        }
+
+        return "";
+    }
+
+    public String dajAerodromeDrzava() {
+        preuzmiPodatkeKorisnika();
+        if (drzava.length() >= 2) {
+            aerodromi = dajAerodrome(korisnik, lozinka, drzava, "");
+            if (aerodromi == null || aerodromi.isEmpty()) {
+                aerodromi = new ArrayList<>();
+            }
+        }
+        return "";
+    }
+
+    public String obrisiAerodromeKorisnika() {
+        aerodromiKorisnika = new ArrayList<>();
+        return "";
+    }
+
+    public String dodajAerodromKorisniku(String icao) {
+        boolean nema = true;
+        icaoOdabrani = icao;
+        System.out.println(icaoOdabrani);
+        for (Aerodrom a : aerodromi) {
+            if (a.getIcao().compareTo(this.icaoOdabrani) == 0) {
+                for (Aerodrom b : aerodromiKorisnika) {
+                    if (a.getIcao().compareTo(b.getIcao()) == 0) {
+                        nema = false;
+                        break;
+                    }
+                }
+                if (nema) {
+                    aerodromiKorisnika.add(a);
+                    System.out.println("dodano");
+                }
+                break;
+            }
+
+        }
+        return "";
+        //TODO obaviti DodajAerodrom u kolekciju Aerodroma u Bazi podataka.
+    }
+
+    private List<Aerodrom> dajAerodrome(String korisnik, String lozinka,
+            String naziv, String drzava) {
+        List<Aerodrom> aerodroms = new ArrayList<>();
+        Zadaca2_2RS zadaca2_2RS = new Zadaca2_2RS(korisnik, lozinka);
+        OdgovorAerodrom odgAero = zadaca2_2RS.dajAerodrome(OdgovorAerodrom.class, naziv, drzava);
+        aerodroms = Arrays.asList(odgAero.getOdgovor());
+        System.out.println(aerodroms.size());
+        return aerodroms;
+    }
+}

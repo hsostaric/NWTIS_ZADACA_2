@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./predlozak.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="naslov">
+        Dodavanje aerodroma
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+               <h:panelGrid columns="3">
+            <h:outputLabel>
+                Naziv aerodroma
+            </h:outputLabel>
+            <h:inputText value="#{dodavanjeAerodroma.naziv}" />
+            <h:commandButton value="Pretraži po nazivu" action="#{dodavanjeAerodroma.dajAerodromeNaziv()}"/>
+            <h:outputLabel>
+                Država
+            </h:outputLabel>
+            <h:inputText value="#{dodavanjeAerodroma.drzava}" />
+            <h:commandButton value="Pretraži po državi" action="#{dodavanjeAerodroma.dajAerodromeDrzava()}"/>
+               </h:panelGrid>
+            <p:dataTable value="#{dodavanjeAerodroma.aerodromi}" var="a" rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                 rowsPerPageTemplate="5,10,15,30">
+                <p:column>
+                    <f:facet name="header">ICAO</f:facet>#{a.icao}
+                </p:column>
+                
+                <p:column>
+                     <f:facet name="header">Naziv</f:facet>#{a.naziv}
+                </p:column>
+                 
+                <p:column> <f:facet name="header">Država</f:facet>#{a.drzava}</p:column>
+                <p:column>
+                    <p:commandButton value="Dodaj aerodrom" action="#{dodavanjeAerodroma.dodajAerodromKorisniku(a.icao)}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
+

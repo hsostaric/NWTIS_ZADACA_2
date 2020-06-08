@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <f:view locale="#{lokalizacija.jezik}" >
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="dizajn.css"/>
+        <title><ui:insert name="naslov">Naslov</ui:insert></title>
+    </h:head>
+
+    <h:body>
+        <div id="top" class="top">
+            <h:form>
+                <h:commandLink action="izbornikPocetak" value="#{p['predlozak.pocetna']}"/>
+                <h:outputText  styleClass="praznaLinija" value="&nbsp;"/>
+                 <h:commandLink  action="lokalizacija" value="#{p['predlozak.lokalizacija']}(p1)"/>         
+                <h:outputText rendered="#{prijavaKorisnika.prijavljen ==false}" 
+                              styleClass="praznaLinija" value="&nbsp;"/>
+                <h:commandLink rendered="#{prijavaKorisnika.prijavljen ==false}" 
+                               action="prijavaKorisnika" value="#{p['predlozak.prijava']}(p3)"/>
+                <h:outputText rendered="#{prijavaKorisnika.prijavljen ==true}" 
+                              styleClass="praznaLinija" value="&nbsp;"/>
+                <h:commandLink rendered="#{prijavaKorisnika.prijavljen ==true}" 
+                               action="dodajAerodrom" value="#{p['predlozak.dodajAerodrom']}(p4)"/>
+                 <h:outputText 
+                     rendered="#{prijavaKorisnika.prijavljen ==true}" styleClass="praznaLinija" value="&nbsp;"/>
+                <h:commandLink rendered="#{prijavaKorisnika.prijavljen ==true}" action="pregledAerodroma" 
+                               value="#{p['predlozak.pregledAerodroma']}(p5)"/>
+                  <h:outputText rendered="#{prijavaKorisnika.prijavljen ==true}"
+                      styleClass="praznaLinija" value="&nbsp;"/>
+                <h:commandLink 
+                    rendered="#{prijavaKorisnika.prijavljen == true}"
+                    action="pregledAviona" value="#{p['predlozak.pregledAviona']}(p6)"/>
+                <h:outputText styleClass="praznaLinija" value="&nbsp;" 
+                                 rendered="#{prijavaKorisnika.prijavljen == true}"/>
+                <h:commandLink 
+                    rendered="#{prijavaKorisnika.prijavljen ==true}"
+                    action="odjava" value="#{p['predlozak.odjava']}"/>
+            </h:form>
+        </div>
+        <div id="content" class="center_content">
+            <ui:insert name="content">Sadržaj</ui:insert>
+        </div>
+    </h:body>
+  </f:view>
+</html>

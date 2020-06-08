@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./predlozak.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="naslov">
+        #{p['prijavaKorisnika.naslov']}
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form style="margin: 0 auto"> 
+            <h:panelGrid columns="3">
+            <h:outputLabel value="#{p['prijavaKorisnika.username']}: "/>
+            <h:inputText value="#{prijavaKorisnika.korisnickoIme}" required="true" 
+                         requiredMessage="#{p['prijavaKorisnika.poruka']} !" id="korisnickoIme" />
+            <h:message class="porukaPogreske" for="korisnickoIme"/>
+            <h:outputLabel value="#{p['prijavaKorisnika.lozinka']}: "/>
+            <h:inputSecret value="#{prijavaKorisnika.lozinka}" required="true" 
+                         requiredMessage="#{p['prijavaKorisnika.poruka']} !" id="lozinka" />
+            <h:message class="porukaPogreske" for="lozinka"/>
+            <h:commandButton id="gumbPrijave" value="#{p['prijavaKorisnika.prijaviMe']}" action="#{prijavaKorisnika.prijaviKorisnika()}"/>
+            </h:panelGrid>
+        </h:form>    
+     
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,22 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+index.naslov=Home - Exercise 10_1
+odabirDrzave.naslov=Country selection
+odabirDrzave.premaloZnakova=No min 2 characters in
+odabirDrzave.prikaziAerodromeZaDrzavu=Show airports for the country
+odabirDrzave.upisiKodDrzave=Enter Country Code
+predlozak.engleski=English
+predlozak.hrvatski=Hrvatski
+predlozak.izbornikOdabirDrzave=Select Country
+predlozak.izbornikPocetak=Homepage
+predlozak.izbornikPregledAerodroma=Airport Overview
+predlozak.njemacki=Deutsch
+predlozak.odaberiJezik=Select language
+pregledAerodroma.grad=City
+pregledAerodroma.ident=Identification
+pregledAerodroma.iso=ISO country code
+pregledAerodroma.naslov=Airport overview
+pregledAerodroma.naziv=Airport name
+pregledAerodroma.pregledAerodroma=Airport overview

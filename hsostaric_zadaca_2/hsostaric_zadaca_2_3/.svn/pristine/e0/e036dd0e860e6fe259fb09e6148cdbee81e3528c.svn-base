@@ -1,0 +1,149 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.foi.nwtis.hsostaric.web.zrna;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.ApplicationMap;
+import javax.inject.Inject;
+import lombok.Getter;
+import lombok.Setter;
+import org.foi.nwtis.hsostaric.konfiguracije.bp.BP_Konfiguracija;
+import org.foi.nwtis.hsostaric.rest.klijenti.Zadaca2_2RS;
+import org.foi.nwtis.podaci.Aerodrom;
+import org.foi.nwtis.podaci.OdgovorAerodrom;
+import org.foi.nwtis.rest.klijenti.LIQKlijent;
+import org.foi.nwtis.rest.klijenti.OWMKlijent;
+import org.foi.nwtis.rest.podaci.Adresa;
+import org.foi.nwtis.rest.podaci.Lokacija;
+import org.foi.nwtis.rest.podaci.MeteoPodaci;
+
+/**
+ *
+ * @author Hrvoje-PC
+ */
+@Named(value = "pregledAerodroma")
+@SessionScoped
+public class PregledAerodroma implements Serializable {
+
+    @Inject
+    PrijavaKorisnika prijavaKorisnika;
+
+    @Inject
+    @ApplicationMap
+    private Map<String, Object> applicationMap;
+
+    @Getter
+    @Setter
+    List<Aerodrom> aerodromiKorisnika = new ArrayList<>();
+    @Getter
+    @Setter
+    String datumPocetka = "";
+    @Getter
+    @Setter
+    String datumKraja = "";
+    @Getter
+    @Setter
+    String korisnik = "";
+    @Getter
+    @Setter
+    String lozinka = "";
+    @Getter
+    @Setter
+    Lokacija lokacijaServisa = new Lokacija();
+    @Getter
+    @Setter
+    Lokacija lokacija = new Lokacija();
+    @Getter
+    @Setter
+    String nazivAerodroma = "";
+    @Setter
+    @Getter
+    LIQKlijent liqKlijent;
+
+    @Getter
+    @Setter
+    MeteoPodaci meteoPodaci = new MeteoPodaci();
+
+    private BP_Konfiguracija bpk;
+
+    @Getter
+    @Setter
+    private OWMKlijent owmk;
+
+    public PregledAerodroma() {
+
+    }
+
+    private void preuzmiPodatkeKorisnika() {
+        korisnik = prijavaKorisnika.getKorisnickoIme();
+        lozinka = prijavaKorisnika.getLozinka();
+    }
+
+    public String preuzmiAerodromeKorisnika() {
+        preuzmiPodatkeKorisnika();
+        Zadaca2_2RS zrs = new Zadaca2_2RS(korisnik, lozinka);
+        OdgovorAerodrom odgovor = zrs.dajAerodomeKorisnika(OdgovorAerodrom.class);
+        aerodromiKorisnika = new ArrayList(Arrays.
+                asList(odgovor
+                        .getOdgovor()));
+        if (aerodromiKorisnika == null
+                || aerodromiKorisnika.isEmpty()) {
+            aerodromiKorisnika = new ArrayList();
+        }
+        return "";
+    }
+
+    public String dajGeolokacijskePodatke(String icao) {
+
+        podaciIzBazePodataka(icao);
+        podaciSaServisa();
+        return "";
+    }
+
+    private void podaciIzBazePodataka(String icao) {
+        for (Aerodrom aerodrom : aerodromiKorisnika) {
+            if (aerodrom.getIcao()
+                    .equals(icao)) {
+                nazivAerodroma = aerodrom.getNaziv();
+                lokacija.setLatitude(aerodrom
+                        .getLokacija()
+                        .getLatitude());
+                lokacija.setLongitude(aerodrom
+                        .getLokacija()
+                        .getLongitude());
+                break;
+            }
+        }
+    }
+
+    private void podaciSaServisa() {
+        bpk = (BP_Konfiguracija) applicationMap.get("BP_Konfig");
+        String apiKey = bpk.getKonfig()
+                .dajPostavku("LocationIQ.token");
+        if (apiKey != null
+                && !apiKey.equals("")) {
+            liqKlijent = new LIQKlijent(apiKey);
+            lokacijaServisa = liqKlijent.getGeoLocation(nazivAerodroma);
+        }
+        String apiKeyOWM = bpk.getKonfig()
+                .dajPostavku("OpenWeatherMap.apikey");
+        if (apiKeyOWM != null
+                && !apiKeyOWM.equals("")) {
+            owmk = new OWMKlijent(apiKeyOWM);
+            meteoPodaci = owmk.getRealTimeWeather(
+                    lokacija.getLatitude(),
+                    lokacija.getLongitude());
+         
+        }
+    }
+
+}

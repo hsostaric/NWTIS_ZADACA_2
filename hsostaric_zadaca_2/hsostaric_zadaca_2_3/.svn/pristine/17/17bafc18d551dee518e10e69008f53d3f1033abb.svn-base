@@ -1,0 +1,22 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+index.naslov=Home - \u00dcbung 10_1
+odabirDrzave.naslov= L\u00e4nderauswahl
+odabirDrzave.premaloZnakova=Nein, mindestens 2 Zeichen
+odabirDrzave.prikaziAerodromeZaDrzavu=Flugh\u00e4fen f\u00fcr das Land anzeigen
+odabirDrzave.upisiKodDrzave=Country Code eingeben
+predlozak.engleski=English
+predlozak.hrvatski=Hrvatski
+predlozak.izbornikOdabirDrzave=Land ausw\u00e4hlen
+predlozak.izbornikPocetak=Homepage
+predlozak.izbornikPregledAerodroma=Flughafen\u00fcbersicht
+predlozak.njemacki=Deutsch
+predlozak.odaberiJezik=Sprache ausw\u00e4hlen
+pregledAerodroma.grad=Stadt
+pregledAerodroma.ident=Identifikation
+pregledAerodroma.iso=ISO-L\u00e4ndercode
+pregledAerodroma.naslov=Flughafen\u00fcbersicht
+pregledAerodroma.naziv=Flughafenname
+pregledAerodroma.pregledAerodroma= Flughafen\u00fcbersicht

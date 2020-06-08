@@ -1,0 +1,6 @@
+org\foi\nwtis\hsostaric\web\podaci\AirplaneDAO.class
+org\foi\nwtis\hsostaric\web\podaci\AirportDAO.class
+org\foi\nwtis\hsostaric\web\serveri\Zadaca2.class
+org\foi\nwtis\hsostaric\web\dretve\PreuzimanjeLetovaAvionaAerodroma.class
+org\foi\nwtis\hsostaric\web\slusaci\SlusacAplikacije.class
+org\foi\nwtis\hsostaric\web\podaci\KorisnikDAO.class
